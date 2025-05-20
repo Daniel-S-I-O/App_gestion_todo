@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import { Task } from '../types';
 
-const API = 'https://jsonplaceholder.typicode.com/todos';
+const API = 'todos';
 
 export const getTasks = async (): Promise<Task[]> => {
-  const res = await axios.get(`${API}?_limit=30`);
+  const res = await axios.get(`${API}`);
   return res.data;
 };
 
@@ -14,9 +14,9 @@ export const addTask = async (task: Partial<Task>): Promise<Task> => {
 };
 
 export async function updateTask(id: number, updates: Partial<Task>) {
-  await axios.put(`/tasks/${id}`, updates);
+  await axios.put(`${API}/${id}`, updates);
 }
 
 export async function deleteTask(id: number) {
-  await axios.delete(`/tasks/${id}`);
+  await axios.delete(`${API}/${id}`);
 }
